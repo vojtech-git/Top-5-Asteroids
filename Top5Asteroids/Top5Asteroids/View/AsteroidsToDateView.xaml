@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Top5Asteroids.ViewModel"
+             x:Class="Top5Asteroids.View.AsteroidsToDateView">
+    
+    <ContentPage.BindingContext>
+        <local:AsteroidsListViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <Button Command="{Binding LoadAsteroidsCommand}"/>
+
+        <ListView x:Name="AsteroidsList" ItemsSource="{Binding asteroids}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label Text="{Binding Designation}"/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

@@ -1,6 +1,9 @@
 ﻿using System;
+using Top5Asteroids.View;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Threading.Tasks;
+using Top5Asteroids.Model;
 
 namespace Top5Asteroids
 {
@@ -10,10 +13,12 @@ namespace Top5Asteroids
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            ApiHelper.InitializeClient();
+
+            MainPage = new AsteroidsToDateView();
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
         }
 
