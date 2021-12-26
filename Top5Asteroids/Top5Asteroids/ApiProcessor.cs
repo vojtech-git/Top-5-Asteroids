@@ -30,19 +30,15 @@ namespace Top5Asteroids
             }
         }
 
-        public static async Task<AsteroidsToDate> LoadAsteroids(DateTime startDate, DateTime endDate)
+        public static async Task<ApiResponseObject> LoadAsteroids(DateTime startDate)
         {
-            string url = $"https://api.nasa.gov/neo/rest/v1/feed?start_date={startDate.Year}-{startDate.Month}-{startDate.Day}&end_date={endDate.Year}-{endDate.Month}-{endDate.Day}&detailed=false&api_key={key}";
+            string url = $"https://api.nasa.gov/neo/rest/v1/feed?start_date={startDate.Year}-{startDate.Month}-{startDate.Day}&end_date={startDate.Year}-{startDate.Month}-{startDate.Day}&detailed=false&api_key={key}";
 
             using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Trying to get data from: " + url);
-
-                    AsteroidsToDate asteroids = await response.Content.ReadAsAsync<AsteroidsToDate>();
-
-                    Console.WriteLine("response = " + asteroids);
+                    ApiResponseObject asteroids = await response.Content.ReadAsAsync<ApiResponseObject>();
 
                     return asteroids;
                 }

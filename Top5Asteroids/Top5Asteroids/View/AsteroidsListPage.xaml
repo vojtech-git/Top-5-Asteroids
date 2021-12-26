@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Top5Asteroids.View.AsteroidsListPage"
+             xmlns:ViewModel="clr-namespace:Top5Asteroids.ViewModel"
+             Title="Asteroidy pro zvolený den">
+
+    <ContentPage.BindingContext>
+        <ViewModel:AsteroidsListViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="*, auto" ColumnDefinitions="auto, *, auto">
+
+        <ListView x:Name="AsteroidsList" ItemsSource="{Binding Asteroids}" HasUnevenRows="True" Grid.ColumnSpan="3">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell >
+                        <StackLayout Margin="5,8" 
+                                     Padding="10,10" 
+                                     BackgroundColor="#aa000000">
+
+                            <Label Text="{Binding Name}" 
+                                   FontSize="Medium" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#9c9c9c"/>
+                            <Button Command="{Binding Path=BindingContext.OpenDetailsPageCommand, Source={x:Reference AsteroidsList}}" 
+                                    CommandParameter="{Binding .}"
+                                    Text="Asteroid details"/>
+
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Text="&lt;"
+                Grid.Row="1"
+                Grid.Column="0"
+                Command="{Binding SubtractDayCommand}"/>
+        <DatePicker Date="{Binding SelectedDate}"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    TextColor="White"/>
+        <Button Text="&gt;"
+                Grid.Row="1"
+                Grid.Column="2"
+                Command="{Binding AddDayCommand}"/>
+    </Grid>
+    
+</ContentPage>

@@ -15,10 +15,10 @@ namespace Top5Asteroids
 
             ApiHelper.InitializeClient();
 
-            MainPage = new AsteroidsToDateView();
+            MainPage = new NavigationPage(new AsteroidsListPage());
         }
 
-        protected override async void OnStart()
+        protected override void OnStart()
         {
         }
 

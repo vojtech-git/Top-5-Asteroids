@@ -1,32 +1,74 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections.ObjectModel;
-using Top5Asteroids.Model;
-using System.Threading.Tasks;
-using Xamarin.Forms;
 using System.Windows.Input;
+using Top5Asteroids.Model;
+using Top5Asteroids.View;
+using Xamarin.Forms;
 
 namespace Top5Asteroids.ViewModel
 {
-    class AsteroidsListViewModel
+    class AsteroidsListViewModel : BindableObject
     {
-        public ObservableCollection<Asteroid> asteroids;
-
         public AsteroidsListViewModel()
         {
-            asteroids = new ObservableCollection<Asteroid>();
+            Asteroids = new ObservableCollection<Asteroid>();
+
+            SelectedDate = DateTime.Now;
         }
 
-        public ICommand LoadAsteroidsCommand => new Command(LoadAsteroids);
-        async void LoadAsteroids()
+        
+        public ObservableCollection<Asteroid> Asteroids { get; set; }
+
+        private DateTime selectedDate;
+        public DateTime SelectedDate 
         {
-            var loadedAsteroids = await ApiProcessor.LoadAsteroids(DateTime.Now, DateTime.Now);
-            
-            foreach (Asteroid asteroid in loadedAsteroids.Near_earth_objects.Asteroids)
+            get { return selectedDate; }
+            set
             {
-                asteroids.Add(asteroid);
+                if (value == selectedDate)
+                    return;
+
+                selectedDate = value;
+
+                LoadAsteroidsIntoListView(selectedDate);
+
+                OnPropertyChanged();
             }
+        }
+
+
+        public async void LoadAsteroidsIntoListView(DateTime date)
+        {
+            Asteroids.Clear();
+
+            ApiResponseObject loadedAsteroids = await ApiProcessor.LoadAsteroids(date);
+            
+            foreach (Asteroid[] asteroids in loadedAsteroids.AsteroidsToDate.Values)
+            {
+                foreach (Asteroid asteroid in asteroids)
+                {
+                    this.Asteroids.Add(asteroid);
+                }
+            }
+        }
+
+        public ICommand OpenDetailsPageCommand => new Command(OpenDetailsPage);
+        public async void OpenDetailsPage(object obj)
+        {
+            Asteroid asteroidClicked = obj as Asteroid;
+            await App.Current.MainPage.Navigation.PushAsync(new DetailsPage(asteroidClicked));
+        }
+
+        public ICommand AddDayCommand => new Command(AddDay);
+        public void AddDay()
+        {
+            SelectedDate = SelectedDate.AddDays(1);
+        }
+
+        public ICommand SubtractDayCommand => new Command(SubtractDay);
+        public void SubtractDay()
+        {
+            SelectedDate = SelectedDate.AddDays(-1);
         }
     }
 }
