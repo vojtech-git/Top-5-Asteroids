@@ -3,7 +3,166 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Top5Asteroids.View.DetailsPage"
              BackgroundColor="Black">
-    <StackLayout>
-        <Label x:Name="HazardousLabel" TextColor="White"/>
-    </StackLayout>
+
+    <Grid x:Name="MainGrid" RowDefinitions="auto, auto, auto, auto, auto, auto, auto, auto, auto " ColumnDefinitions="*, 0.5*, 0.5*">
+
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+               TextColor="White"
+               Text="Absoulute Magnitude (h):"
+               FontSize="Medium"/>
+        <Label Grid.Row="0" Grid.Column="2"
+               x:Name="AbsoluteMagnitudeLabel"
+               TextColor="White"
+               FontSize="Medium"
+               HorizontalTextAlignment="End"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+               TextColor="White"
+               Text="Is Hazardous:"
+               FontSize="Medium"
+               Margin="0,5"/>
+        <Label Grid.Row="1" Grid.Column="2"
+               x:Name="IsHazardousLabel"
+               TextColor="White"
+               FontSize="Medium"
+               HorizontalTextAlignment="End"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+               TextColor="White"
+               Text="Is Sentry Object:"
+               FontSize="Medium"
+               Margin="0,5"/>
+        <Label Grid.Row="2" Grid.Column="2"
+               x:Name="IsSentryLabel"
+               TextColor="White"
+               FontSize="Medium"
+               HorizontalTextAlignment="End"/>
+
+        <Label Grid.Row="3" Grid.Column="0"
+               TextColor="White"
+               Text="Diameter:"
+               FontSize="Medium"
+               Margin="0,5"
+               VerticalTextAlignment="Center"/>
+        <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+               x:Name="DiameterLabel"
+               Text="123"
+               TextColor="White"
+               FontSize="Medium"
+               HorizontalTextAlignment="End"
+               VerticalTextAlignment="Center"/>
+        <Picker Grid.Row="3" Grid.Column="2"
+                x:Name="DiameterPicker"
+                TextColor="White"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                SelectedIndexChanged="DiameterPicker_SelectedIndexChanged">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Kilometers</x:String>
+                    <x:String>Meters</x:String>
+                    <x:String>Miles</x:String>
+                    <x:String>Feet</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+               Text="Close Approach: "
+               TextColor="White"
+               FontSize="Large"
+               VerticalTextAlignment="Center"
+               TextDecorations="Underline"/>
+        <Picker Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                x:Name="AproachesPicker"
+                Title="Select aproach"
+                TextColor="White"
+                SelectedIndexChanged="AproachesPicker_SelectedIndexChanged"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"/>
+
+        <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+               Text=" Approach Date:"
+               TextColor="White"
+               FontSize="Medium"
+               VerticalTextAlignment="Center"/>
+        <Label Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
+               x:Name="ApproachDateLabel"
+               Text="15151"
+               TextColor="White"
+               FontSize="Medium"
+               HorizontalTextAlignment="End"
+               VerticalTextAlignment="Center"/>
+
+        <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+               Text=" Relative Velocity:"
+               TextColor="White"
+               FontSize="Medium"
+               VerticalTextAlignment="Center"/>
+        <Label Grid.Row="6" Grid.Column="1"
+               x:Name="RelativeVelocityLabel"
+               Text="15151"
+               TextColor="White"
+               FontSize="Medium"
+               HorizontalTextAlignment="End"
+               VerticalTextAlignment="Center"/>
+        <Picker Grid.Row="6" Grid.Column="2"
+                x:Name="RelativeVelocityPicker"
+                TextColor="White"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                SelectedIndexChanged="RelativeVelocityPicker_SelectedIndexChanged"
+                TitleColor="Purple">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Km/h</x:String>
+                    <x:String>Km/s</x:String>
+                    <x:String>Mil/h</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+               Text=" Miss Distance:"
+               TextColor="White"
+               FontSize="Medium"
+               VerticalTextAlignment="Center"/>
+        <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+               x:Name="MissDistanceLabel"
+               Text="15151"
+               TextColor="White"
+               FontSize="Medium"
+               HorizontalTextAlignment="End"
+               VerticalTextAlignment="Center"/>
+        <Picker Grid.Row="7" Grid.Column="2"
+                x:Name="MissDistancePicker"
+                TextColor="White"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                SelectedIndexChanged="MissDistancePicker_SelectedIndexChanged"
+                TitleColor="Purple">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>AU</x:String>
+                    <x:String>LD</x:String>
+                    <x:String>Km</x:String>
+                    <x:String>Mil</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Label Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"
+               Text=" Orbiting Body:"
+               TextColor="White"
+               FontSize="Medium"
+               VerticalTextAlignment="Center"/>
+        <Label Grid.Row="8" Grid.Column="2"
+               x:Name="OrbitingBodyLabel"
+               Text="15151"
+               TextColor="White"
+               FontSize="Medium"
+               HorizontalTextAlignment="End"
+               VerticalTextAlignment="Center"/>
+
+    </Grid>
 </ContentPage>
